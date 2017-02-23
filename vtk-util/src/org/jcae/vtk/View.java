@@ -36,6 +36,7 @@ import vtk.vtkInteractorStyleRubberBand3D;
 import vtk.vtkInteractorStyleTrackballCamera;
 import vtk.vtkPlaneCollection;
 import vtk.vtkRenderer;
+import vtk.vtkNativeLibrary;
 
 /**
  *
@@ -55,6 +56,12 @@ public class View extends Canvas {
 		System.getProperty("org.jcae.vtk.selectOnlyVisible", "true"));
 	static
 	{
+		vtkNativeLibrary.LoadNativeLibraries(
+			vtkNativeLibrary.VTKRENDERINGCORE,
+			vtkNativeLibrary.VTKRENDERINGOPENGL,
+			vtkNativeLibrary.VTKRENDERINGANNOTATION,
+			vtkNativeLibrary.VTKINTERACTIONWIDGETS,
+			vtkNativeLibrary.VTKINTERACTIONSTYLE);
 		Utils.setVTKLogFile(new File(System.getProperty("user.home"),
 			".vtk.log").getPath());
 		VTKMemoryManager.GC.SetDebug(Boolean.getBoolean("vtk.gc.debug"));
